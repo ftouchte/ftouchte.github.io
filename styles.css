@@ -1,5 +1,22 @@
 body {
-    margin: 0;
-    text-align: center;
+    margin-left: 15rem; 
+    margin-right: 15rem;
+    margin-top: 2rem;
+    text-align:center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+#sidebar {
+    text-align: center;
+    width: 100%;
+}
+
+
+#author_name{
+    font-size: 40px;
+}
+
+
+a {
+    color:dodgerblue;
+}
