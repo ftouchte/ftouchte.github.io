@@ -41,11 +41,6 @@ a.active {
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
 }
 
-img.author_pp { 
-    width: 14rem;
-    height: 11rem;
-}
-
 .footer {
     padding: 2px;
     /*text-align: center;*/
