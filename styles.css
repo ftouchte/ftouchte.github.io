@@ -66,3 +66,34 @@ a.active {
         margin: 0;
     }
 }
+
+blockquote {
+    font-style: italic;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: large;
+    /* border-left: 5px solid #27105f; */
+    position: relative;
+    padding-left: 10px;
+    margin: 20px 0; */
+    /* background-color: #f9f9f9; */
+}
+
+blockquote::before,
+blockquote::after {
+    font-family: 'Georgia', serif; /* You can choose any font you like */
+    font-size: 3em; /* Adjust the size as needed */
+    color: #cccccc; /* Adjust the color as needed */
+    position: absolute;
+}
+blockquote::before {
+    content: '“'; /* Opening quotation mark */
+    /*left: 10px; /* Adjust position */
+    /*top: -10px; /* Adjust position */
+    top: -15px;
+}
+
+blockquote::after {
+    content: '”'; /* Closing quotation mark */
+    /*right: 10px; /* Adjust position */
+    /*bottom: -10px; /* Adjust position */
+}
