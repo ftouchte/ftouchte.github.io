@@ -8,6 +8,7 @@
 .header h1 {
     font-size: 2.5rem; /*40px*/
     text-align: center;
+    color: #595959;
 }
 
 .topnav {
@@ -35,10 +36,15 @@ a.active {
   }
 
 .maincol {
-    margin-left: 14rem;
-    margin-right: 14rem;
+    margin-left: clamp(1rem, 10vw, 14rem);
+    margin-right: clamp(1rem, 10vw, 14rem);
     margin-top: 2rem;
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
+}
+
+img.author_pp { 
+    width: 14rem;
+    height: 11rem;
 }
 
 .footer {
@@ -49,4 +55,3 @@ a.active {
     overflow: auto;
     color: black;
 }
-

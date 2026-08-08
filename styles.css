@@ -76,8 +76,8 @@ a.active {
   }
 
 .maincol {
-    margin-left: 14rem;
-    margin-right: 14rem;
+    margin-left: clamp(1rem, 10vw, 14rem);
+    margin-right: clamp(1rem, 10vw, 14rem);
     margin-top: 2rem;
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
 }
@@ -96,12 +96,6 @@ a.active {
     color: black;
 }
 
-/* Pour les écrans de largeurs inférieures à 600 pixels*/
-@media screen and (max-width: 600px) {
-    .maincol {
-        margin: 0;
-    }
-}
 
 blockquote {
     font-style: italic;
