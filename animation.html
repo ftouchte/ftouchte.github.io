@@ -1,0 +1,173 @@
+<html>
+    <svg viewBox="0 0 400 100" width="2400" height="600">
+        
+        <!-- Incoming lepton -->
+        <line id="incomingLepton"
+            x1="10"  y1="0"
+            x2="50" y2="50"
+            stroke="black"
+            stroke-width="1" />
+
+        <!-- Outgoing lepton -->
+        <line id="outgoingLepton"
+            x1="50"  y1="50"
+            x2="10" y2="100"
+            stroke="black"
+            stroke-width="1" />
+
+
+        <!-- Virtual photon -->
+        <path id="virtualPhoton" d=""
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none" />
+
+        <!-- Draw the whole nucleon -->
+        <circle 
+            cx="200" cy="50" r="40"
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none" />
+
+        <!-- Draw the struck quark -->
+        <circle 
+            id="quark1"
+            cx="175" cy="50" r="5"
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="black" />
+
+        <circle 
+            id="quark2"
+            cx="205" cy="30" r="5"
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="black" />
+        
+        <circle 
+            id="quark3"
+            cx="210" cy="65" r="5"
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="black" />
+
+        <!-- Gluon -->
+        <path id="gluon12" d=""
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none" />
+
+        <!-- Gluon -->
+        <path id="gluon13" d=""
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none" />
+
+        <!-- Gluon -->
+        <path id="gluon23" d=""
+            stroke="black" stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none" />
+
+    </svg>
+
+    <script>
+
+        function virtualPhotonPath(x1, y1, x2, y2, amp, nbPeriod, nbPtsPerPeriod){
+        let d = '';
+        const len = Math.sqrt(Math.pow(x2-x1,2)+ Math.pow(y2-y1,2));
+        const period = len/nbPeriod;
+        const alpha = Math.atan2(y2-y1, x2-x1);
+        for(let n=0; n<=nbPeriod*nbPtsPerPeriod; n++){
+            const x = period*n/nbPtsPerPeriod;
+            const phase = 2*Math.PI*n/nbPtsPerPeriod;
+            const y = amp*Math.sin(phase);
+            const xRotated = Math.cos(alpha)*x - Math.sin(alpha)*y;
+            const yRotated = Math.sin(alpha)*x + Math.cos(alpha)*y;
+            const xTrue = x1 + xRotated;
+            const yTrue = y1 + yRotated;
+            d += (n===0 ? 'M' : 'L') + xTrue.toFixed(2) + ',' + yTrue.toFixed(2) + ' ';
+        }
+        console.log(d);
+        return d;
+        }
+
+        // Draw virtual photon
+        const virtualPhoton = document.getElementById('virtualPhoton');
+        virtualPhoton.setAttribute('d', virtualPhotonPath(50,50,175,50, -6, 5,50));
+        
+
+        function gluonPath(x1, y1, x2, y2, amp, nbPeriod, nbPtsPerPeriod, shift){
+        let d = '';
+
+        const alpha = Math.atan2(y2-y1, x2-x1);
+
+        const x10 = x1 + shift*Math.cos(alpha);
+        const y10 = y1 + shift*Math.sin(alpha);
+        const x20 = x2 - shift*Math.cos(alpha);
+        const y20 = y2 - shift*Math.sin(alpha);
+
+        d += 'M' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' ';
+        d += 'L' + x10.toFixed(2) + ',' + y10.toFixed(2) + ' ';
+
+        const len = Math.sqrt(Math.pow(x20-x10,2)+ Math.pow(y20-y10,2));
+        const period = len/nbPeriod;
+
+
+        for(let n=0; n<=nbPeriod*nbPtsPerPeriod; n++){
+            const t = n/nbPtsPerPeriod;
+            const w = 2*Math.PI;
+            const vx = period;
+            const x = amp*Math.sin(w*t) + vx*t;
+            const y = -amp + amp*Math.cos(w*t);
+            const xRotated = Math.cos(alpha)*x - Math.sin(alpha)*y;
+            const yRotated = Math.sin(alpha)*x + Math.cos(alpha)*y;
+            const xTrue = x10 + xRotated;
+            const yTrue = y10 + yRotated;
+            // const xTrue = x1 + x;
+            // const yTrue = y1 + y;
+            d += 'L' + xTrue.toFixed(2) + ',' + yTrue.toFixed(2) + ' ';
+        }
+
+        d += 'L' + x20.toFixed(2) + ',' + y20.toFixed(2) + ' ';
+        d += 'L' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' ';
+
+        return d;
+        }
+
+        // get quarks
+        const quark1 = document.getElementById('quark1');
+        const quark2 = document.getElementById('quark2');
+        const quark3 = document.getElementById('quark3');
+
+        // Draw gluon12
+        const gluon12 = document.getElementById('gluon12');
+        gluon12.setAttribute('d', gluonPath(quark1.cx.baseVal.value,
+                                                quark1.cy.baseVal.value,
+                                                    quark2.cx.baseVal.value,
+                                                        quark2.cy.baseVal.value, 3, 3, 100, 5));
+
+        // Draw gluon13
+        const gluon13 = document.getElementById('gluon13');
+        gluon13.setAttribute('d', gluonPath(quark1.cx.baseVal.value,
+                                                quark1.cy.baseVal.value,
+                                                    quark3.cx.baseVal.value,
+                                                        quark3.cy.baseVal.value, 3, 3, 100, 5));
+
+        // Draw gluon23
+        const gluon23 = document.getElementById('gluon23');
+        gluon23.setAttribute('d', gluonPath(quark2.cx.baseVal.value,
+                                                quark2.cy.baseVal.value,
+                                                    quark3.cx.baseVal.value,
+                                                        quark3.cy.baseVal.value, 3, 3, 100, 5));
+
+    </script>
+</html>
