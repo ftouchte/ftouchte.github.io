@@ -31,30 +31,7 @@
             stroke-linejoin="round"
             fill="none" />
 
-        <!-- Draw the struck quark -->
-        <circle 
-            id="quark1"
-            cx="175" cy="50" r="5"
-            stroke="black" stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="black" />
-
-        <circle 
-            id="quark2"
-            cx="205" cy="30" r="5"
-            stroke="black" stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="black" />
         
-        <circle 
-            id="quark3"
-            cx="210" cy="65" r="5"
-            stroke="black" stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="black" />
 
         <!-- Gluon -->
         <path id="gluon12" d=""
@@ -76,6 +53,22 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             fill="none" />
+        
+        <!-- Draw the struck quark -->
+        <circle 
+            id="quark1"
+            cx="175" cy="50" r="5"
+            fill="red" />
+
+        <circle 
+            id="quark2"
+            cx="205" cy="30" r="5"
+            fill="green" />
+        
+        <circle 
+            id="quark3"
+            cx="210" cy="65" r="5"
+            fill="blue" />
 
     </svg>
 
@@ -168,6 +161,59 @@
                                                 quark2.cy.baseVal.value,
                                                     quark3.cx.baseVal.value,
                                                         quark3.cy.baseVal.value, 3, 3, 100, 5));
+
+        /////////////////////////
+        // Animation
+        /////////////////////////
+        // ---- setup for the animated quarks ----
+        const CENTER = { x: 200, y: 50 };
+ 
+        const quarkEls = [
+            document.getElementById('quark1'),
+            document.getElementById('quark2'),
+            document.getElementById('quark3'),
+        ];
+ 
+        // for each quark: radius + starting angle, derived from its initial cx/cy,
+        // and an independent angular speed (radians per millisecond)
+        const quarks = quarkEls.map((el, i) => {
+            const cx0 = el.cx.baseVal.value;
+            const cy0 = el.cy.baseVal.value;
+            const radius = Math.hypot(cx0 - CENTER.x, cy0 - CENTER.y);
+            const angle0 = Math.atan2(cy0 - CENTER.y, cx0 - CENTER.x);
+            const speed = [0.0012, -0.0009, 0.0016][i]; // rad/ms, sens et vitesse différents
+            return { el, radius, angle0, speed };
+        });
+ 
+        const gluonEls = {
+            g12: document.getElementById('gluon12'),
+            g13: document.getElementById('gluon13'),
+            g23: document.getElementById('gluon23'),
+        };
+ 
+        function updateQuark(q, timestamp){
+            const angle = q.angle0 + q.speed * timestamp;
+            const x = CENTER.x + q.radius * Math.cos(angle);
+            const y = CENTER.y + q.radius * Math.sin(angle);
+            q.el.setAttribute('cx', x.toFixed(2));
+            q.el.setAttribute('cy', y.toFixed(2));
+            return { x, y };
+        }
+ 
+        function loop(timestamp){
+            const p1 = updateQuark(quarks[0], timestamp);
+            const p2 = updateQuark(quarks[1], timestamp);
+            const p3 = updateQuark(quarks[2], timestamp);
+ 
+            gluonEls.g12.setAttribute('d', gluonPath(p1.x, p1.y, p2.x, p2.y, 3, 3, 100, 5));
+            gluonEls.g13.setAttribute('d', gluonPath(p1.x, p1.y, p3.x, p3.y, 3, 3, 100, 5));
+            gluonEls.g23.setAttribute('d', gluonPath(p2.x, p2.y, p3.x, p3.y, 3, 3, 100, 5));
+ 
+            requestAnimationFrame(loop);
+        }
+ 
+        requestAnimationFrame(loop);
+
 
     </script>
 </html>
