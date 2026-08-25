@@ -127,3 +127,13 @@ blockquote::after {
     /*right: 10px; /* Adjust position */
     /*bottom: -10px; /* Adjust position */
 }
+
+.nucleon-diagram svg {
+    display: block;      /* REND LE CENTRAGE AUTOMATIQUE POSSIBLE */
+    margin-top: 10rem;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100%;
+    max-width: 500px;   
+    height: auto;
+}

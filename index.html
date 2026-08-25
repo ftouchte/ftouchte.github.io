@@ -35,6 +35,84 @@
             </blockquote>
         </div>
         
+
+        <div class="nucleon-diagram">
+            <svg viewBox="0 0 260 100">
+        
+                <!-- Incoming lepton -->
+                <line id="incomingLepton"
+                    x1="10"  y1="0"
+                    x2="50" y2="50"
+                    stroke="black"
+                    stroke-width="1" />
+
+                <!-- Outgoing lepton -->
+                <line id="outgoingLepton"
+                    x1="50"  y1="50"
+                    x2="10" y2="100"
+                    stroke="black"
+                    stroke-width="1" />
+
+
+                <!-- Virtual photon -->
+                <path id="virtualPhoton" d=""
+                    stroke="black" stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none" />
+
+                <!-- Draw the whole nucleon -->
+                <circle 
+                    cx="200" cy="50" r="40"
+                    stroke="black" stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none" />
+
+                
+
+                <!-- Gluon -->
+                <path id="gluon12" d=""
+                    stroke="black" stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none" />
+
+                <!-- Gluon -->
+                <path id="gluon13" d=""
+                    stroke="black" stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none" />
+
+                <!-- Gluon -->
+                <path id="gluon23" d=""
+                    stroke="black" stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none" />
+                
+                <!-- Draw the struck quark -->
+                <circle 
+                    id="quark1"
+                    cx="175" cy="50" r="5"
+                    fill="red" />
+
+                <circle 
+                    id="quark2"
+                    cx="205" cy="30" r="5"
+                    fill="green" />
+                
+                <circle 
+                    id="quark3"
+                    cx="210" cy="65" r="5"
+                    fill="blue" />
+
+            </svg>
+
+            <p>I'm still working on the animation...</p>
+
+        </div>
 		
 		<!-- <p>This web page aims to centralize all my works. It is also a great opportunity to get use with HTML.</p> -->
         <div style="margin-top: 15rem; margin-left: 2rem;">
@@ -140,6 +218,7 @@
         <p>* <a href="https://www.w3schools.com/" target="_blank" style="text-decoration: none; color: black; text-decoration: underline;">Web site inspired by W3schools</a></p>
     </div> -->
 
+    <script src="nucleon.js" defer></script>
     
 </body>
 </html>

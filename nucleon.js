@@ -1,0 +1,142 @@
+
+
+function virtualPhotonPath(x1, y1, x2, y2, amp, nbPeriod, nbPtsPerPeriod){
+let d = '';
+const len = Math.sqrt(Math.pow(x2-x1,2)+ Math.pow(y2-y1,2));
+const period = len/nbPeriod;
+const alpha = Math.atan2(y2-y1, x2-x1);
+for(let n=0; n<=nbPeriod*nbPtsPerPeriod; n++){
+    const x = period*n/nbPtsPerPeriod;
+    const phase = 2*Math.PI*n/nbPtsPerPeriod;
+    const y = amp*Math.sin(phase);
+    const xRotated = Math.cos(alpha)*x - Math.sin(alpha)*y;
+    const yRotated = Math.sin(alpha)*x + Math.cos(alpha)*y;
+    const xTrue = x1 + xRotated;
+    const yTrue = y1 + yRotated;
+    d += (n===0 ? 'M' : 'L') + xTrue.toFixed(2) + ',' + yTrue.toFixed(2) + ' ';
+}
+console.log(d);
+return d;
+}
+
+// Draw virtual photon
+const virtualPhoton = document.getElementById('virtualPhoton');
+virtualPhoton.setAttribute('d', virtualPhotonPath(50,50,175,50, -6, 5,50));
+
+
+function gluonPath(x1, y1, x2, y2, amp, nbPeriod, nbPtsPerPeriod, shift){
+let d = '';
+
+const alpha = Math.atan2(y2-y1, x2-x1);
+
+const x10 = x1 + shift*Math.cos(alpha);
+const y10 = y1 + shift*Math.sin(alpha);
+const x20 = x2 - shift*Math.cos(alpha);
+const y20 = y2 - shift*Math.sin(alpha);
+
+d += 'M' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' ';
+d += 'L' + x10.toFixed(2) + ',' + y10.toFixed(2) + ' ';
+
+const len = Math.sqrt(Math.pow(x20-x10,2)+ Math.pow(y20-y10,2));
+const period = len/nbPeriod;
+
+
+for(let n=0; n<=nbPeriod*nbPtsPerPeriod; n++){
+    const t = n/nbPtsPerPeriod;
+    const w = 2*Math.PI;
+    const vx = period;
+    const x = amp*Math.sin(w*t) + vx*t;
+    const y = -amp + amp*Math.cos(w*t);
+    const xRotated = Math.cos(alpha)*x - Math.sin(alpha)*y;
+    const yRotated = Math.sin(alpha)*x + Math.cos(alpha)*y;
+    const xTrue = x10 + xRotated;
+    const yTrue = y10 + yRotated;
+    // const xTrue = x1 + x;
+    // const yTrue = y1 + y;
+    d += 'L' + xTrue.toFixed(2) + ',' + yTrue.toFixed(2) + ' ';
+}
+
+d += 'L' + x20.toFixed(2) + ',' + y20.toFixed(2) + ' ';
+d += 'L' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' ';
+
+return d;
+}
+
+// get quarks
+const quark1 = document.getElementById('quark1');
+const quark2 = document.getElementById('quark2');
+const quark3 = document.getElementById('quark3');
+
+// Draw gluon12
+const gluon12 = document.getElementById('gluon12');
+gluon12.setAttribute('d', gluonPath(quark1.cx.baseVal.value,
+                                        quark1.cy.baseVal.value,
+                                            quark2.cx.baseVal.value,
+                                                quark2.cy.baseVal.value, 3, 3, 100, 5));
+
+// Draw gluon13
+const gluon13 = document.getElementById('gluon13');
+gluon13.setAttribute('d', gluonPath(quark1.cx.baseVal.value,
+                                        quark1.cy.baseVal.value,
+                                            quark3.cx.baseVal.value,
+                                                quark3.cy.baseVal.value, 3, 3, 100, 5));
+
+// Draw gluon23
+const gluon23 = document.getElementById('gluon23');
+gluon23.setAttribute('d', gluonPath(quark2.cx.baseVal.value,
+                                        quark2.cy.baseVal.value,
+                                            quark3.cx.baseVal.value,
+                                                quark3.cy.baseVal.value, 3, 3, 100, 5));
+
+/////////////////////////
+// Animation
+/////////////////////////
+// ---- setup for the animated quarks ----
+const CENTER = { x: 200, y: 50 };
+
+const quarkEls = [
+    document.getElementById('quark1'),
+    document.getElementById('quark2'),
+    document.getElementById('quark3'),
+];
+
+// for each quark: radius + starting angle, derived from its initial cx/cy,
+// and an independent angular speed (radians per millisecond)
+const quarks = quarkEls.map((el, i) => {
+    const cx0 = el.cx.baseVal.value;
+    const cy0 = el.cy.baseVal.value;
+    const radius = Math.hypot(cx0 - CENTER.x, cy0 - CENTER.y);
+    const angle0 = Math.atan2(cy0 - CENTER.y, cx0 - CENTER.x);
+    const speed = [0.0012, -0.0009, 0.0016][i]; // rad/ms, sens et vitesse différents
+    return { el, radius, angle0, speed };
+});
+
+const gluonEls = {
+    g12: document.getElementById('gluon12'),
+    g13: document.getElementById('gluon13'),
+    g23: document.getElementById('gluon23'),
+};
+
+function updateQuark(q, timestamp){
+    const angle = q.angle0 + q.speed * timestamp;
+    const x = CENTER.x + q.radius * Math.cos(angle);
+    const y = CENTER.y + q.radius * Math.sin(angle);
+    q.el.setAttribute('cx', x.toFixed(2));
+    q.el.setAttribute('cy', y.toFixed(2));
+    return { x, y };
+}
+
+function loop(timestamp){
+    const p1 = updateQuark(quarks[0], timestamp);
+    const p2 = updateQuark(quarks[1], timestamp);
+    const p3 = updateQuark(quarks[2], timestamp);
+
+    gluonEls.g12.setAttribute('d', gluonPath(p1.x, p1.y, p2.x, p2.y, 3, 3, 100, 5));
+    gluonEls.g13.setAttribute('d', gluonPath(p1.x, p1.y, p3.x, p3.y, 3, 3, 100, 5));
+    gluonEls.g23.setAttribute('d', gluonPath(p2.x, p2.y, p3.x, p3.y, 3, 3, 100, 5));
+
+    requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+
