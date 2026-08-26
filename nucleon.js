@@ -23,6 +23,10 @@ return d;
 const virtualPhoton = document.getElementById('virtualPhoton');
 virtualPhoton.setAttribute('d', virtualPhotonPath(50,50,175,50, -6, 5,50));
 
+const virtualPhotonLength = virtualPhoton.getTotalLength();
+virtualPhoton.style.setProperty("--len", virtualPhotonLength);
+virtualPhoton.style.strokeDasharray = virtualPhotonLength;
+
 
 function gluonPath(x1, y1, x2, y2, amp, nbPeriod, nbPtsPerPeriod, shift){
 let d = '';

@@ -41,25 +41,41 @@
         
                 <!-- Incoming lepton -->
                 <line id="incomingLepton"
-                    x1="10"  y1="0"
+                    class="incomingLeptonFlow"
+                    x1="10"  y1="100"
                     x2="50" y2="50"
                     stroke="black"
                     stroke-width="1" />
+                
+                <text x="0" y="100">
+                        e
+                </text>
 
                 <!-- Outgoing lepton -->
                 <line id="outgoingLepton"
+                    class="outgoingLeptonFlow"
                     x1="50"  y1="50"
-                    x2="10" y2="100"
+                    x2="10" y2="0"
                     stroke="black"
                     stroke-width="1" />
 
+                <text x="0" y="8">
+                        e
+                </text>
+
 
                 <!-- Virtual photon -->
-                <path id="virtualPhoton" d=""
+                <path id="virtualPhoton" 
+                    class="virtualPhotonFlow"
+                    d=""
                     stroke="black" stroke-width="1"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     fill="none" />
+
+                <text x="112" y="70">
+                        ɣ*
+                </text>
 
                 <!-- Draw the whole nucleon -->
                 <circle 
