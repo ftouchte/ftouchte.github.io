@@ -123,7 +123,7 @@ div.education-school p, h3 {
 }
 
 /* Écrans étroits : colonnes empilées */
-@media (max-width: 768px) {
+@media (max-width: 60rem) {
     .maincol {
         flex-direction: column;
         margin: 1rem;
