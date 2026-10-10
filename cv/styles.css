@@ -40,6 +40,12 @@ a.active {
     margin-right: clamp(1rem, 10vw, 14rem);
     margin-top: 2rem;
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
+    /* max-width: 60rem;
+    margin: auto; */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 img.author_pp { 
@@ -54,4 +60,71 @@ img.author_pp {
     margin-top: 20px;
     overflow: auto;
     color: black;
+}
+div.column {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+div.cv-bloc {
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #333;
+    border-style: solid;
+    padding: 1rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+div.cv-bloc h1 {
+    text-align: center;
+}
+
+div.experience-position {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    align-items: center;
+}
+
+div.experience-position li, ul {
+    margin: 1rem;
+}
+
+div.experience-position ul {
+    padding: 0;
+}
+
+div.experience-position p, h3 {
+    margin: 0.5rem;
+}
+
+img.experience-logo {
+    width: 6rem;
+}
+
+p.position-item {
+    /* margin: 2px; */
+    margin-left: 1rem;
+    color: #787777;
+}
+
+div.education-school {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+div.education-school p, h3 {
+    margin: 0.5rem;
+}
+
+/* Écrans étroits : colonnes empilées */
+@media (max-width: 768px) {
+    .maincol {
+        flex-direction: column;
+    }
 }
