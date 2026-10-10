@@ -126,5 +126,18 @@ div.education-school p, h3 {
 @media (max-width: 768px) {
     .maincol {
         flex-direction: column;
+        margin: 1rem;
+    }
+
+    div.cv-bloc {
+        border-radius: 10px;
+        border-width: 0px;
+        border-color: #333;
+        border-style: solid;
+        padding: 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        max-width: 60rem;
+        margin: 0 auto;
     }
 }
