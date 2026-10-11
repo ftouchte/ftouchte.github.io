@@ -1,8 +1,8 @@
 // Allow to swap between pages
 
-const pages = ["index.html", "phd/index.html", "cv/index.html", "projects/index/html", "contact/index.html"];
-
-const current = pages.findIndex(p => location.pathname.endsWith(p));
+const pages = ["/", "/phd/", "/cv/", "/projects/", "/contact/"];
+const path = location.pathname.replace("index\.html$/", "");
+const current = pages.indexOf(path);
 let startX = 0, startY = 0;
 
 document.addEventListener("touchstart", e => {
