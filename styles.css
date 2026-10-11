@@ -138,7 +138,7 @@ a.active {
     margin-top: 5rem;
     margin-left: auto;
     margin-right: auto; 
-    width: 100%;
+    width: 80%;
     max-width: 500px;   
     height: auto;
 }
@@ -171,4 +171,11 @@ a.active {
     45%  { stroke-dashoffset: 0; }
     55%  { stroke-dashoffset: 0; }
     100% { stroke-dashoffset: calc(var(--len) * -1); }
+}
+
+/* Écrans étroits : colonnes empilées */
+@media (max-width: 40rem) {
+    .maincol {
+        margin: 1rem;
+    }
 }
