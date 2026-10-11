@@ -178,6 +178,6 @@ a.active {
 /* Écrans étroits : colonnes empilées */
 @media (max-width: 40rem) {
     .maincol {
-        padding-inline: 0;
+        padding-inline: 10px;
     }
 }
