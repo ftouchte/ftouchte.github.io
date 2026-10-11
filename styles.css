@@ -76,9 +76,11 @@ a.active {
   }
 
 .maincol {
-    margin-left: clamp(0rem, 10vw, 14rem);
-    margin-right: clamp(0rem, 10vw, 14rem);
-    margin-top: 2rem;
+    /* margin-left: clamp(0rem, 10vw, 14rem);
+    margin-right: clamp(0rem, 10vw, 14rem); */
+    max-width: 90rem;
+    margin: 2rem auto 0; /* top | left/right | bottom */
+    padding-inline: clamp(1rem, 5vw, 14rem);
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
 }
 
@@ -176,6 +178,6 @@ a.active {
 /* Écrans étroits : colonnes empilées */
 @media (max-width: 40rem) {
     .maincol {
-        margin: 1rem;
+        padding-inline: 0;
     }
 }
