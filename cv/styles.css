@@ -41,6 +41,7 @@ a.active {
     margin-top: 2rem; */
     max-width: 90rem;
     margin: 2rem auto 0; /* top | left/right | bottom */
+    padding-inline: clamp(1rem, 5vw, 14rem);
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
     display: flex;
     flex-direction: row;
@@ -104,6 +105,7 @@ div.experience-position p, h3 {
 
 img.experience-logo {
     width: 6rem;
+    /* width: clamp(4rem, 5vw, 6rem); */
 }
 
 p.position-item {
@@ -126,7 +128,6 @@ div.education-school p, h3 {
 @media (max-width: 60rem) {
     .maincol {
         flex-direction: column;
-        margin: 1rem;
     }
 
     div.cv-bloc {
@@ -139,5 +140,12 @@ div.education-school p, h3 {
         padding-bottom: 2px;
         max-width: 60rem;
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 40rem) {
+    .maincol {
+        flex-direction: column;
+        padding-inline: 10px;
     }
 }
