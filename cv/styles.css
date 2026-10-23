@@ -39,7 +39,7 @@ a.active {
     /* margin-left: clamp(1rem, 10vw, 14rem);
     margin-right: clamp(1rem, 10vw, 14rem);
     margin-top: 2rem; */
-    max-width: 100rem;
+    max-width: 90rem;
     margin: 2rem auto 0; /* top | left/right | bottom */
     min-height: 100vh; /* Ensure the body fills the entire viewport height */
     display: flex;
