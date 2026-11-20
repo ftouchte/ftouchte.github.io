@@ -17,12 +17,22 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 
+\usepackage{draftwatermark}
+\SetWatermarkText{This is a draft}    % the text shown
+\SetWatermarkScale{3}           % size; reduce if it runs off the page
+\SetWatermarkColor[gray]{0.8}     % 0 = black, 1 = white; higher is lighter
+\SetWatermarkAngle{45}            % rotation in degrees (default is diagonal)
+%\SetWatermarkLightness{0.9}       % alternative to the color command
+
 \begin{document}
 
-% \begin{tikzpicture}[remember picture,overlay]
-%     %\draw (current page.north west) rectangle (current page.south east);
-%     \draw (0, 0) rectangle (4, -4);
-% \end{tikzpicture}
+\begin{tikzpicture}[remember picture,overlay]
+    \coordinate (A) at ([shift={(-0.6cm,-0.7cm)}]current page.north east);
+    \coordinate (B) at ($(A) +(-4,-4)$);
+    %\draw (A) rectangle (B);
+    \node[inner sep=0pt] at ($(A)!0.5!(B)$)
+        {\includegraphics[width=4cm,height=4cm,keepaspectratio]{../ftc.png}};
+\end{tikzpicture}
 % ========================
 %       YOUR CV
 % ========================
@@ -35,16 +45,11 @@ Université Paris-Saclay
 IJCLab | Laboratoire de Physique des 2 Infinis Irène Joliot-Curie
 
 
+\subsection*{\centering Profil}
 
-\begin{center}
-    \Huge
-    {\color{red} This is a draft.}
-\end{center}
-%\section*{\centering Profil}
-
-% ========================
-%       Experience
-% ========================
+Experimental physicist and engineer, I develop simulation and data reconstruction software within major international institutions (Jefferson Lab, IJCLab).
+I'm contributor to the official reconstruction software (coatjava) of the CLAS collaboration and responsible for the development of the reconstruction code of the drift chamber of the new ALERT detector. I position myself at the crossroads of instrumentation, data analysis, and scientific software development, in the demanding context of experimental physics.
+\#OpenToWorkInOctober2027
 
 \section*{\centering Experience}
 
@@ -68,7 +73,7 @@ IJCLab | Laboratoire de Physique des 2 Infinis Irène Joliot-Curie
     \item Measure the Coherent DVCS off $^4\mbox{He}$ with ALERT and CLAS at JLab
 \end{itemize}
 
-Keywords: C/C++, Java, hadron structure, QCD, nuclear GPDs, DVCS, particle detection, data processing
+%Keywords: C/C++, Java, hadron structure, QCD, nuclear GPDs, DVCS, particle detection, data processing
 
 \subsection*{Visiting Researcher}
 
@@ -89,7 +94,7 @@ Keywords: C/C++, Java, hadron structure, QCD, nuclear GPDs, DVCS, particle detec
     \item Played the role of on-call detector expert for a 24/7 running accelerator
 \end{itemize}
 
-Keywords: Data taking, monitoring, target change, target purge
+%Keywords: Data taking, monitoring, target change, target purge
 
 
 \subsection*{Research Intern}
@@ -111,7 +116,7 @@ Keywords: Data taking, monitoring, target change, target purge
     \item Implemented the decoding algorithm
 \end{itemize}
 
-Keywords: C/C++, Geant4, simulation, drift chamber, signal generation and processing
+%Keywords: C/C++, Geant4, simulation, drift chamber, signal generation and processing
 
 \subsection*{Engineering Intern}
 
@@ -132,7 +137,7 @@ Keywords: C/C++, Geant4, simulation, drift chamber, signal generation and proces
     \item Studied the linearity of CMS luminometers with respect to the REMUS system
 \end{itemize}
 
-Keywords: C/C++, ROOT, simulation, luminosity measurement, calibration
+%Keywords: C/C++, ROOT, simulation, luminosity measurement, calibration
 
 %Reference: https://indico.cern.ch/event/1313707/
 
@@ -175,15 +180,15 @@ Keywords: C/C++, ROOT, simulation, luminosity measurement, calibration
     October 2021 -- September 2024
 \end{minipage}
 
-\subsection*{CPGE Lycée National Léon Mba}
+% \subsection*{CPGE Lycée National Léon Mba}
 
-\begin{minipage}{0.6\linewidth}
-    Higher school preparatory classes
-\end{minipage}
-\begin{minipage}{0.4\linewidth}
-    \raggedleft
-    September 2018 -- July 2021
-\end{minipage}
+% \begin{minipage}{0.6\linewidth}
+%     Higher school preparatory classes
+% \end{minipage}
+% \begin{minipage}{0.4\linewidth}
+%     \raggedleft
+%     September 2018 -- July 2021
+% \end{minipage}
 
 \vfill
 \begin{center}
